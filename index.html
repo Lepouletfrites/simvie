@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Street to Riches Sim</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Simulateur : De la Rue à la Richesse</h1>
+        <div id="time-display">
+            <p><span id="current-time"></span></p>
+        </div>
+    </header>
+
+    <main>
+        
+        <div id="stats-container">
+            <div class="stat-item" style="width: 100%; justify-content: center; font-size: 1.2em; margin-bottom: 15px; padding: 10px; background-color: #e0f7fa; border-radius: 5px;">
+                <span class="stat-label">💰 Argent :</span>
+                <span id="argent-value" style="font-weight: bold;">0 $</span>
+            </div>
+            
+            <div class="stat-item">
+                <span class="stat-label">❤️ Santé :</span>
+                <progress id="sante-bar" value="100" max="100"></progress>
+                <span id="sante-value">100</span>
+            </div>
+
+            <div class="stat-item">
+                <span class="stat-label">🍔 Faim :</span>
+                <progress id="faim-bar" value="0" max="100"></progress>
+                <span id="faim-value">0</span>
+            </div>
+            
+            <div class="stat-item">
+                <span class="stat-label">⚡ Énergie :</span>
+                <progress id="energie-bar" value="100" max="100"></progress>
+                <span id="energie-value">100</span>
+            </div>
+
+            <div class="stat-item">
+                <span class="stat-label">😊 Bonheur :</span>
+                <progress id="bonheur-bar" value="50" max="100"></progress>
+                <span id="bonheur-value">50</span>
+            </div>
+        </div>
+
+        <hr>
+
+        <div id="actions-container">
+            <h2>Choisissez une Action</h2>
+            
+            <div class="category-title">💶 Économie et Survie</div>
+            <div id="economie" class="action-buttons">
+                <button id="mendier-btn">Mendier</button>
+                <button id="travail-simple-btn" disabled>Chercher un petit Travail (À venir)</button>
+            </div>
+
+            <div class="category-title">🌡️ Besoins et Repos</div>
+            <div id="besoins" class="action-buttons">
+                <button id="nourriture-btn">Acheter de la Nourriture</button>
+                <button id="dormir-btn">Dormir</button>
+                <button id="soigner-btn">Se soigner (Petits bobos)</button></div>
+            
+            <div class="category-title">🥳 Bien-être et Moral</div>
+            <div id="bien-etre" class="action-buttons">
+                <button id="divertissement-btn">Se divertir</button> <button id="etude-btn" disabled>Étudier (À venir)</button>
+            </div>
+        </div>
+
+        <hr>
+
+        <div id="log-container">
+            <h2>Journal</h2>
+            <p id="message">Bienvenue dans votre nouvelle vie. Votre premier objectif est de survivre !</p>
+        </div>
+    </main>
+
+    <div id="action-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="modal-title">Détails de l'Action</h3>
+            <p id="modal-description"></p>
+            <div id="modal-effects"></div>
+            <button id="modal-execute-btn">Exécuter l'action</button>
+            <div id="modal-duration-input">
+    </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

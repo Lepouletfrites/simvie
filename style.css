@@ -1,0 +1,195 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e8e8e8;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+main {
+    max-width: 900px; /* Un peu plus large pour les catégories */
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+h1, h2 {
+    color: #3f51b5; /* Bleu plus soutenu */
+    text-align: center;
+}
+
+/* -------------------- AFFICHAGE DU TEMPS -------------------- */
+#time-display {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+/* -------------------- STATISTIQUES COMPACTES -------------------- */
+#stats-container {
+    display: flex;
+    flex-wrap: wrap; /* Pour s'assurer que les barres passent à la ligne si l'écran est petit */
+    justify-content: space-around;
+    padding: 10px 0;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    width: 45%; /* Deux colonnes */
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+.stat-label {
+    min-width: 80px; /* Alignement */
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+progress {
+    flex-grow: 1;
+    height: 15px; /* Barres plus petites */
+    margin-right: 5px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+/* Couleurs des barres (à modifier dans le JS pour la barre de bonheur) */
+#sante-bar::-webkit-progress-value { background-color: #e53935; } /* Rouge */
+#faim-bar::-webkit-progress-value { background-color: #fb8c00; } /* Orange */
+#energie-bar::-webkit-progress-value { background-color: #43a047; } /* Vert */
+#bonheur-bar::-webkit-progress-value { background-color: #ffeb3b; } /* Jaune */
+
+/* -------------------- CONTENEUR D'ACTIONS PAR CATÉGORIE -------------------- */
+#actions-container {
+    margin-top: 25px;
+}
+
+.category-title {
+    background-color: #3f51b5;
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 1.1em;
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* Style des boutons */
+.action-buttons button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.2s;
+    flex-grow: 1;
+    min-width: 150px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.action-buttons button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Couleurs spécifiques aux catégories (ajustez si nécessaire) */
+#economie button { background-color: #4CAF50; color: white; } /* Vert pour l'argent */
+#besoins button { background-color: #2196F3; color: white; } /* Bleu pour la survie */
+#bien-etre button { background-color: #FF9800; color: white; } /* Orange pour le bien-être */
+
+
+/* -------------------- JOURNAL -------------------- */
+#log-container {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #f1f1f1;
+    border-left: 5px solid #3f51b5;
+    border-radius: 5px;
+}
+/* -------------------- MODALE -------------------- */
+.modal {
+    display: none; /* Cacher par défaut */
+    position: fixed; 
+    z-index: 10; /* Assure que la modale est au-dessus de tout */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); /* Fond semi-transparent */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Centrer verticalement */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Largeur de la fenêtre */
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+/* Animation simple d'apparition */
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#modal-effects {
+    margin: 10px 0 20px 0;
+    padding: 10px;
+    background-color: #e0f7fa;
+    border-left: 4px solid #3f51b5;
+    border-radius: 4px;
+}
+
+#modal-execute-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+#modal-execute-btn:hover {
+    background-color: #45a049;
+}
