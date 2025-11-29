@@ -1,160 +1,172 @@
+/* Styles de base et pour la lisibilité */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #e8e8e8;
-    color: #333;
+    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
+    background-color: #f4f4;
+    color: #333;
 }
 
-main {
-    max-width: 900px; /* Un peu plus large pour les catégories */
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
+/* -------------------- ÉLÉMENTS FIXES -------------------- */
 
-h1, h2 {
-    color: #3f51b5; /* Bleu plus soutenu */
-    text-align: center;
-}
-
-/* -------------------- AFFICHAGE DU TEMPS -------------------- */
-#time-display {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-}
-
-/* -------------------- STATISTIQUES COMPACTES -------------------- */
+/* Stats Container (Header) */
 #stats-container {
-    display: flex;
-    flex-wrap: wrap; /* Pour s'assurer que les barres passent à la ligne si l'écran est petit */
-    justify-content: space-around;
-    padding: 10px 0;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fafafa;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f0f0f0;
+    border-bottom: 2px solid #ccc;
+    padding: 8px 10px; /* Moins de padding */
+    box-sizing: border-box;
+    z-index: 5; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.stat-item {
+.clickable-header {
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+.clickable-header:active {
+    background-color: #e0e0e0;
+}
+
+.header-line {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    width: 45%; /* Deux colonnes */
-    margin: 5px 0;
+    margin-bottom: 5px;
+}
+
+#stats-container h1 {
+    font-size: 1.2em; /* Réduit la taille du titre */
+    margin: 0;
+}
+
+#current-time {
+    font-size: 0.9em;
+    margin: 0;
+    color: #555;
+}
+
+/* Stats Compactes */
+#compact-stats {
+    display: flex;
+    justify-content: space-around; /* Répartit les éléments */
+    flex-wrap: wrap;
+    font-weight: bold;
     font-size: 0.9em;
 }
 
-.stat-label {
-    min-width: 80px; /* Alignement */
-    font-weight: bold;
-    margin-right: 5px;
+.stat-item {
+    margin: 0 5px;
+    padding: 3px 0;
 }
 
-progress {
-    flex-grow: 1;
-    height: 15px; /* Barres plus petites */
-    margin-right: 5px;
-    border-radius: 3px;
+/* JOURNAL FIXE EN BAS */
+#log-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #eee;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 5; 
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    height: 60px; /* Réduit légèrement la hauteur */
     overflow: hidden;
 }
 
-/* Couleurs des barres (à modifier dans le JS pour la barre de bonheur) */
-#sante-bar::-webkit-progress-value { background-color: #e53935; } /* Rouge */
-#faim-bar::-webkit-progress-value { background-color: #fb8c00; } /* Orange */
-#energie-bar::-webkit-progress-value { background-color: #43a047; } /* Vert */
-#bonheur-bar::-webkit-progress-value { background-color: #ffeb3b; } /* Jaune */
-
-/* -------------------- CONTENEUR D'ACTIONS PAR CATÉGORIE -------------------- */
-#actions-container {
-    margin-top: 25px;
+#log-container h2 {
+    font-size: 0.8em;
+    margin: 0 0 3px 0;
+    color: #888;
 }
 
-.category-title {
-    background-color: #3f51b5;
-    color: white;
+#message {
+    font-size: 0.8em;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Utile si le message est trop long */
+}
+
+/* Contenu principal (zone de défilement) */
+#main-content {
+    /* Marge pour éviter que le contenu ne soit caché par les éléments fixes */
+    margin-top: 100px; /* Espace pour la barre de stats compacte */
+    margin-bottom: 60px; /* Espace pour le journal */
+    padding: 15px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-y: auto; /* Permet le défilement */
+}
+
+/* -------------------- ACTIONS ET CATÉGORIES -------------------- */
+.action-category {
+    margin-bottom: 20px;
     padding: 10px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.action-category h2 {
     font-size: 1.1em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    margin-top: 0;
+    color: #007bff;
 }
 
-.action-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-/* Style des boutons */
-.action-buttons button {
-    padding: 12px 20px;
+.action-category button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-    transition: all 0.2s;
-    flex-grow: 1;
-    min-width: 150px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s;
 }
 
-.action-buttons button:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.action-category button:hover:not([disabled]) {
+    background-color: #0056b3;
+}
+.action-category button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
-/* Couleurs spécifiques aux catégories (ajustez si nécessaire) */
-#economie button { background-color: #4CAF50; color: white; } /* Vert pour l'argent */
-#besoins button { background-color: #2196F3; color: white; } /* Bleu pour la survie */
-#bien-etre button { background-color: #FF9800; color: white; } /* Orange pour le bien-être */
-
-
-/* -------------------- JOURNAL -------------------- */
-#log-container {
-    margin-top: 30px;
-    padding: 15px;
-    background-color: #f1f1f1;
-    border-left: 5px solid #3f51b5;
-    border-radius: 5px;
-}
-/* -------------------- MODALE -------------------- */
+/* -------------------- MODALES (Général) -------------------- */
 .modal {
-    display: none; /* Cacher par défaut */
+    display: none; 
     position: fixed; 
-    z-index: 10; /* Assure que la modale est au-dessus de tout */
+    z-index: 10; 
     left: 0;
     top: 0;
     width: 100%; 
     height: 100%; 
     overflow: auto; 
-    background-color: rgba(0,0,0,0.4); /* Fond semi-transparent */
+    background-color: rgba(0,0,0,0.6); 
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* Centrer verticalement */
+    margin: 20% auto; 
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Largeur de la fenêtre */
-    max-width: 500px;
+    width: 80%; 
+    max-width: 400px;
     border-radius: 8px;
     position: relative;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
-}
-
-/* Animation simple d'apparition */
-@keyframes animatetop {
-    from {top: -300px; opacity: 0}
-    to {top: 0; opacity: 1}
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 .close-button {
@@ -171,11 +183,12 @@ progress {
     cursor: pointer;
 }
 
+/* -------------------- MODALE ACTION -------------------- */
 #modal-effects {
     margin: 10px 0 20px 0;
     padding: 10px;
-    background-color: #e0f7fa;
-    border-left: 4px solid #3f51b5;
+    background-color: #fff3e0;
+    border-left: 4px solid #ff9800;
     border-radius: 4px;
 }
 
@@ -189,7 +202,56 @@ progress {
     cursor: pointer;
     font-size: 1em;
 }
+#modal-execute-btn[disabled] {
+    background-color: #9e9e9e;
+}
 
-#modal-execute-btn:hover {
-    background-color: #45a049;
+/* -------------------- MODALE SAVE/LOAD -------------------- */
+
+.modal-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.save-load-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.save-load-buttons button {
+    flex-grow: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.save-button {
+    background-color: #2196F3; /* Bleu pour Sauvegarder */
+    color: white;
+}
+.save-button:hover {
+    background-color: #0b7dda;
+}
+
+.load-button {
+    background-color: #FF9800; /* Orange pour Charger */
+    color: white;
+}
+.load-button:hover {
+    background-color: #e68a00;
+}
+
+.firebase-status {
+    margin-top: 15px;
+    font-size: 0.8em;
+    text-align: center;
+    color: #666;
 }

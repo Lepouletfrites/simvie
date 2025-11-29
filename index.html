@@ -3,95 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Street to Riches Sim</title>
+    <title>Survival Sim</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>Simulateur : De la Rue à la Richesse</h1>
-        <div id="time-display">
-            <p><span id="current-time"></span></p>
+    <header id="stats-container" class="clickable-header">
+        <div class="header-line">
+            <h1>Survivant</h1>
+            <p id="current-time">📅 01 Jan - ⏰ 08:00</p>
+        </div>
+        
+        <div id="compact-stats">
+            <span class="stat-item">💰 <span id="argent-value">0 $</span></span>
+            <span class="stat-item health">❤️ <span id="sante-value">100</span>%</span>
+            <span class="stat-item hunger">🍽️ <span id="faim-value">0</span>%</span>
+            <span class="stat-item energy">⚡ <span id="energie-value">100</span>%</span>
+            <span class="stat-item happiness">😊 <span id="bonheur-value">50</span>%</span>
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         
-        <div id="stats-container">
-            <div class="stat-item" style="width: 100%; justify-content: center; font-size: 1.2em; margin-bottom: 15px; padding: 10px; background-color: #e0f7fa; border-radius: 5px;">
-                <span class="stat-label">💰 Argent :</span>
-                <span id="argent-value" style="font-weight: bold;">0 $</span>
-            </div>
-            
-            <div class="stat-item">
-                <span class="stat-label">❤️ Santé :</span>
-                <progress id="sante-bar" value="100" max="100"></progress>
-                <span id="sante-value">100</span>
-            </div>
+        <section class="action-category">
+            <h2>🏠 Survie & Ressources</h2>
+            <div id="survival-actions-container"></div>
+        </section>
 
-            <div class="stat-item">
-                <span class="stat-label">🍔 Faim :</span>
-                <progress id="faim-bar" value="0" max="100"></progress>
-                <span id="faim-value">0</span>
-            </div>
-            
-            <div class="stat-item">
-                <span class="stat-label">⚡ Énergie :</span>
-                <progress id="energie-bar" value="100" max="100"></progress>
-                <span id="energie-value">100</span>
-            </div>
+        <section class="action-category">
+            <h2>💊 Santé & Repos</h2>
+            <div id="health-actions-container"></div>
+        </section>
 
-            <div class="stat-item">
-                <span class="stat-label">😊 Bonheur :</span>
-                <progress id="bonheur-bar" value="50" max="100"></progress>
-                <span id="bonheur-value">50</span>
-            </div>
-        </div>
+        <section class="action-category">
+            <h2>🥳 Moral & Loisir</h2>
+            <div id="moral-actions-container"></div>
+        </section>
 
-        <hr>
-
-        <div id="actions-container">
-            <h2>Choisissez une Action</h2>
-            
-            <div class="category-title">💶 Économie et Survie</div>
-            <div id="economie" class="action-buttons">
-                <button id="mendier-btn">Mendier</button>
-                <button id="travail-simple-btn" disabled>Chercher un petit Travail (À venir)</button>
-            </div>
-
-            <div class="category-title">🌡️ Besoins et Repos</div>
-            <div id="besoins" class="action-buttons">
-                <button id="nourriture-btn">Acheter de la Nourriture</button>
-                <button id="dormir-btn">Dormir</button>
-                <button id="soigner-btn">Se soigner (Petits bobos)</button></div>
-            
-            <div class="category-title">🥳 Bien-être et Moral</div>
-            <div id="bien-etre" class="action-buttons">
-                <button id="divertissement-btn">Se divertir</button> <button id="etude-btn" disabled>Étudier (À venir)</button>
-            </div>
-        </div>
-
-        <hr>
-
-        <div id="log-container">
-            <h2>Journal</h2>
-            <p id="message">Bienvenue dans votre nouvelle vie. Votre premier objectif est de survivre !</p>
-        </div>
     </main>
+
+    <footer id="log-container">
+        <h2>Journal</h2>
+        <p id="message">Bienvenue dans votre nouvelle vie. Votre premier objectif est de survivre !</p>
+    </footer>
 
     <div id="action-modal" class="modal">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h3 id="modal-title">Détails de l'Action</h3>
-            <p id="modal-description"></p>
+            <span class="close-button action-close">&times;</span>
+            <h3 id="modal-title">Confirmer l'Action</h3>
+            <p id="modal-description">Détails de l'action en cours :</p>
+            
             <div id="modal-effects"></div>
-            <button id="modal-execute-btn">Exécuter l'action</button>
-            <div id="modal-duration-input">
-    </div>
-
+            
+            <button id="modal-execute-btn">Confirmer et Exécuter</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <div id="save-load-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button save-close">&times;</span>
+            <h3>💾 Sauvegarde et Chargement</h3>
+            <p>Entrez un nom de slot pour sauvegarder ou charger votre progression.</p>
+            
+            <input type="text" id="slot-name-input" placeholder="Nom du slot (ex: 'Slot1', 'Maison')" class="modal-input">
+            
+            <div class="save-load-buttons">
+                <button id="save-btn" class="save-button">Sauvegarder</button>
+                <button id="load-btn" class="load-button">Charger</button>
+            </div>
+            <p class="firebase-status" id="firebase-status">Connexion à Firebase en cours...</p>
+        </div>
+    </div>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
